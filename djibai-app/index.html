@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>djibai 项目文档</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre code {
+            display: block;
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: auto;
+        }
+        ul, ol {
+            margin-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<h1>djibai</h1>
+<blockquote>
+    <p>为什么叫 djibai，因为这是 ai 开发的项目 djib 负责搬运 ai 负责写</p>
+</blockquote>
+<p>基于 Vue3 , 开发类似天天租赁小程序</p>
+<p><strong>下面是建议的项目目录结构，已按你提的5大核心模块拆分，每一块后面我跟一句开发/测试建议。</strong></p>
+<p>主流小程序开发模式也适用（H5/小程序可复用），接口和 SDK 用 mock/真实接口切换都方便。</p>
+<hr>
+<h2>项目目录结构（MVP）</h2>
+<pre><code>src/
+├── api/                     # API 接口封装
+│   ├── auth.ts              # 认证相关接口
+│   ├── product.ts           # 商品相关接口
+│   ├── order.ts             # 订单相关接口
+│   ├── user.ts              # 用户相关接口
+│   └── ...                  # 其它扩展
+├── assets/                  # 静态资源（图片、3D模型等）
+├── components/              # 通用组件
+│   ├── ProductCard.vue
+│   ├── ProductDetail.vue
+│   ├── RentalCalculator.vue
+│   ├── UserProfile.vue
+│   ├── RentalHistory.vue
+│   ├── GlobalNotification.vue
+│   └── ...                  # 其它通用组件
+├── composables/             # 组合式函数（useXxx）
+│   ├── useAuth.ts           # 登录/鉴权逻辑
+│   ├── useOrder.ts          # 订单 CRUD
+│   └── useCart.ts           # 购物车状态/租赁逻辑
+├── router/                  # 路由配置
+│   └── index.ts
+├── store/                   # 状态管理（Pinia）
+│   ├── auth.ts
+│   ├── product.ts
+│   ├── order.ts
+│   ├── cart.ts
+│   └── user.ts
+├── views/                   # 页面级组件
+│   ├── Home.vue             # 首页/商品列表
+│   ├── ProductList.vue
+│   ├── ProductDetail.vue
+│   ├── Rental.vue           # 租赁流程页
+│   ├── OrderList.vue
+│   ├── OrderDetail.vue
+│   ├── UserCenter.vue
+│   ├── Login.vue
+│   └── ...                  # 其它页面
+├── plugins/                 # 插件（如三方 SDK 封装）
+│   ├── aliCredit.ts         # 支付宝芝麻信用
+│   ├── wxPay.ts             # 微信支付
+│   ├── threejs.ts           # Three.js 封装
+│   └── ws.ts                # WebSocket 封装
+├── utils/                   # 工具函数
+│   ├── validator.ts         # 校验工具
+│   ├── formatter.ts         # 格式化工具
+│   └── ...                  # 其它
+├── App.vue
+├── main.ts
+└── tests/                   # 单元测试/集成测试
+    ├── components/
+    ├── composables/
+    ├── views/
+    └── ...
+</code></pre>
+<h2>开发建议与测试思路（每目录/模块简述）</h2>
+<ul>
+    <li><strong>api/</strong>：接口和 SDK 封装，一定 mock 先行，接口定义提前出来，前后端并行无障碍。</li>
+    <li><strong>components/</strong>：强烈建议业务独立，写 props、emit 和单元测试（比如 ProductCard 测试商品渲染/点击事件）。</li>
+    <li><strong>composables/</strong>：组合式函数，方便复用、单元测试。比如 useAuth 可以 mock token、本地存储做测试。</li>
+    <li><strong>router/</strong>：页面跳转逻辑单独放，方便权限路由控制。</li>
+    <li><strong>store/</strong>：推荐用 Pinia，状态可测试、可快照恢复。每个模块单独 state/action，解耦。</li>
+    <li><strong>views/</strong>：页面级入口组件，测试用 vue-test-utils 直接挂载。</li>
+    <li><strong>plugins/</strong>：第三方 SDK 做二次封装，便于 mock、替换（比如支付宝、微信支付、WebSocket）。</li>
+    <li><strong>utils/</strong>：工具函数单测友好，公用场景抽出来就放这里。</li>
+    <li><strong>tests/</strong>：推荐 jest + vue-test-utils，组件和组合式函数都要有基础单测，业务流程可写集成测试。</li>
+</ul>
+<h2>开发顺序建议（从易到难）</h2>
+<ol>
+    <li>用户认证模块（登录/鉴权 useAuth, store/auth, api/auth, Login.vue）</li>
+    <li>商品浏览（ProductList, ProductCard, ProductDetail，store/product, api/product）</li>
+    <li>租赁流程（Rental.vue, RentalCalculator, useCart, store/cart, api/order）</li>
+    <li>订单管理（OrderList, OrderDetail, useOrder, store/order, api/order，WebSocket）</li>
+    <li>用户中心（UserCenter, UserProfile, RentalHistory, store/user, api/user）</li>
+</ol>
+<p>每完成一个模块建议：</p>
+<ul>
+    <li>对应组件、组合式函数都要有基础单元测试（props、事件、API调用等）。</li>
+    <li>页面级 E2E 测试（比如 cypress，做基本流程回归）。</li>
+</ul>
+<p>需要哪个模块的详细代码、测试样例或者具体开发文档，直接点名说哪个目录、哪个模块，我可以分步陪你撸下去！<br>如果觉得目录还可以再精简/拆分也可以继续优化，别怕“删库重构”，MVP 阶段主要是快，别一上来写死结构，能跑通是王道！</p>
+<p>你想先撸哪个模块？还是全部按顺序逐个细化？</p>
+</body>
+</html>
