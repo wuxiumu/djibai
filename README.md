@@ -108,6 +108,19 @@ src/
 
 你想先撸哪个模块？还是全部按顺序逐个细化？
 
+
+## 快速开始
+
+```bash
+cd djibai-app && npm install && npm run dev
+```
+
+## 冒烟自检
+
+```bash
+bash scripts/smoke.sh
+```
+
 ## SEO 字段预留（产品页 HTML 统一生成时用）
 
 | 字段 | 用途 |

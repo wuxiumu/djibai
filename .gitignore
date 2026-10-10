@@ -1,3 +1,9 @@
 djibai-app/node_modules
 /.idea/
 /djibai-app/.vscode/
+.env
+.env.*
+!.env.example
+.DS_Store
+djibai-app/dist/
+*.log
