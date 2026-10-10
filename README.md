@@ -1,4 +1,9 @@
-# djibai 
+# djibai · 租赁小程序方向（Vue3）
+
+> 类似「天天租赁」的 **Vue3 租赁业务前端骨架**，适合设备/物品租赁行业定制。
+
+**定制 / 合作：** 微信 **qingbao199101**（备注：租赁小程序）｜ [wuxiumu@163.com](mailto:wuxiumu@163.com)
+
 >为什么叫djibai，因为这是ai开发的项目 djib 负责搬运 ai负责写
 
 基于 Vue3 ,开发类似天天租赁小程序
@@ -102,3 +107,67 @@ src/
 如果觉得目录还可以再精简/拆分也可以继续优化，别怕“删库重构”，MVP 阶段主要是快，别一上来写死结构，能跑通是王道！
 
 你想先撸哪个模块？还是全部按顺序逐个细化？
+
+## SEO 字段预留（产品页 HTML 统一生成时用）
+
+| 字段 | 用途 |
+|---|---|
+| `seo_title` | `<title>` / OG title |
+| `seo_description` | meta description |
+| `canonical_url` | 规范 URL |
+| `og_image` | 分享图 |
+| `robots` | 如 `index,follow` |
+| `json_ld_type` | SoftwareApplication / WebPage / FAQPage |
+| `hreflang` | zh-CN / en |
+| `site_name` | 白标品牌名 |
+
+> **GEO ≠ 地理定位。** GEO = Generative Engine Optimization（生成式引擎优化），见下一节。
+
+## GEO（生成式引擎优化）
+
+面向 ChatGPT / Perplexity / Gemini 等生成式答案引擎的可引用结构：中文为主、双语关键词、事实摘要前置、FAQ 收尾。
+
+### 关键词（中英）
+
+- 中文：租赁小程序, Vue3租赁, 设备租赁, 租赁商城, 行业定制
+- English: rental mini program, Vue3 rental, equipment rental, rental ecommerce
+
+### 事实摘要
+
+- 产品：租赁业务前端模块化骨架（Vue3）。
+- 适合：设备/物品租赁商家与外包团队。
+- 交付：按品类改模块、接真实支付与订单。
+- 不做：开箱即含完整合规支付与风控（需按业务接）。
+
+### FAQ
+
+**Q：这是什么？**  
+A：见事实摘要「产品」。
+
+**Q：如何定制？**  
+A：微信 `qingbao199101`，备注项目名。
+
+**Q：是否包含密钥或付费数据？**  
+A：默认不含；按各项目说明自行配置。
+
+## 定制合作
+
+品类模板、订单/押金流程、后台对接。加微信备注「租赁小程序」。
+
+---
+
+## 联系方式
+
+定制、演示或合作：
+
+- 邮箱：[wuxiumu@163.com](mailto:wuxiumu@163.com)
+- 微信：**qingbao199101**（添加请备注来意）
+
+### 赞助支持
+
+如果内容对你有帮助，欢迎自愿赞助。
+
+| 微信赞赏码 | 支付宝收款码 |
+|---|---|
+| ![微信赞赏码](https://chiguashentan-test.oss-cn-beijing.aliyuncs.com/wxprogram/zan/20261002185236_31_227.png) | ![支付宝收款码](https://chiguashentan-test.oss-cn-beijing.aliyuncs.com/wxprogram/zan/20261002185309_32_227.jpg) |
+
